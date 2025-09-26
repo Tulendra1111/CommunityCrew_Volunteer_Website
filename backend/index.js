@@ -11,7 +11,7 @@ dotenv.config({ path: "./.env" });
 
 app.use(
   cors({
-    origin: [process.env.FRONTEND_URL],
+    origin: "https://communitycrew-volunteer-website-frontend.onrender.com",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
