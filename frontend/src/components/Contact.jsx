@@ -16,7 +16,7 @@ const Contact = () => {
     
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/v1/message/send",
+        "https://communitycrew-volunteer-website-2.onrender.com/api/v1/message/send",
         { name, email, phone, message },
         {
           withCredentials: true,
