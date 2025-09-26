@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
           // Then verify token with backend (with timeout)
           try {
             const response = await Promise.race([
-              axios.get('http://localhost:5000/api/v1/auth/profile', {
+              axios.get('https://communitycrew-volunteer-website-2.onrender.com/api/v1/auth/profile', {
                 headers: {
                   Authorization: `Bearer ${token}`,
                 },
