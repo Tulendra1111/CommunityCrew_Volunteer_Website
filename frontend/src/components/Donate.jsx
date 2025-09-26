@@ -61,7 +61,7 @@ const Donate = () => {
 
       await axios
         .post(
-          "https://communitycrew-volunteer-website-2.onrender.com/api/v1/checkout",
+          "https://communitycrew-volunteer-backend.onrender.com/api/v1/checkout",
           paymentData,
           {
             withCredentials: true,

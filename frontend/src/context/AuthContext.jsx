@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
           // Then verify token with backend (with timeout)
           try {
             const response = await Promise.race([
-              axios.get('https://communitycrew-volunteer-website-2.onrender.com/api/v1/auth/profile', {
+              axios.get('https://communitycrew-volunteer-backend.onrender.com/api/v1/auth/profile', {
                 headers: {
                   Authorization: `Bearer ${token}`,
                 },
@@ -87,7 +87,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await axios.post('https://communitycrew-volunteer-website-2.onrender.com/api/v1/auth/login', {
+      const response = await axios.post('https://communitycrew-volunteer-backend.onrender.com/api/v1/auth/login', {
         email,
         password,
       });
@@ -115,7 +115,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (name, email, password) => {
     try {
-      const response = await axios.post('https://communitycrew-volunteer-website-2.onrender.com/api/v1/auth/register', {
+      const response = await axios.post('https://communitycrew-volunteer-backend.onrender.com/api/v1/auth/register', {
         name,
         email,
         password,
