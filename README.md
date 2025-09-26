@@ -46,7 +46,7 @@ A modern, full-stack web application built with the MERN stack (MongoDB, Express
 ### Backend
 - **Node.js** - JavaScript runtime
 - **Express.js** - Web framework
-- **MongoDB** - NoSQL database
+- **MongoDB Atlas** - Cloud-hosted NoSQL database
 - **Mongoose** - MongoDB object modeling
 - **JWT** - JSON Web Tokens for authentication
 - **Bcryptjs** - Password hashing
@@ -121,7 +121,7 @@ MERN-STACK-VOLUNTEER WebSite/
 
 ### Prerequisites
 - **Node.js** (v14 or higher)
-- **MongoDB** (local installation or MongoDB Atlas)
+- **MongoDB Atlas Account** (cloud database)
 - **Git**
 
 ### Installation
@@ -146,11 +146,17 @@ MERN-STACK-VOLUNTEER WebSite/
 
 ### Running the Application
 
-1. **Start MongoDB**
-   - Make sure MongoDB is running on your system
-   - Default connection: `mongodb://127.0.0.1:27017`
+1. **Setup MongoDB Atlas**
+   - Create a MongoDB Atlas account at [mongodb.com/atlas](https://www.mongodb.com/atlas)
+   - Create a new cluster and get your connection string
+   - See `backend/MONGODB_ATLAS_SETUP.md` for detailed setup instructions
 
-2. **Start Backend Server**
+2. **Configure Environment Variables**
+   - Create a `.env` file in the backend directory
+   - Add your MongoDB Atlas connection string and other required variables
+   - See `backend/MONGODB_ATLAS_SETUP.md` for the complete configuration
+
+3. **Start Backend Server**
    ```bash
    cd backend
    npm run dev
@@ -170,8 +176,9 @@ MERN-STACK-VOLUNTEER WebSite/
 ## 🔧 Configuration
 
 ### Database Configuration
-- **MongoDB Connection**: Update `MONGO_URI` in `.env`
+- **MongoDB Atlas Connection**: Update `MONGO_URI` in `.env` with your Atlas connection string
 - **Database Name**: `CommunityCrew_Project`
+- **Setup Guide**: See `backend/MONGODB_ATLAS_SETUP.md` for detailed instructions
 
 ### Email Configuration
 - **Gmail Setup**: Enable 2-Factor Authentication
@@ -242,8 +249,9 @@ MERN-STACK-VOLUNTEER WebSite/
 3. Update frontend API URLs to production
 
 ### Database Deployment
-- Use MongoDB Atlas for cloud database
-- Update `MONGO_URI` in production environment
+- **MongoDB Atlas**: Already configured for cloud database
+- **Production Setup**: Update `MONGO_URI` in production environment with production cluster
+- **Network Access**: Configure IP whitelist in Atlas dashboard
 
 ## 🤝 Contributing
 

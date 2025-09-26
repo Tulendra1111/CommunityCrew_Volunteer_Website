@@ -24,6 +24,25 @@ app.use("/api/v1/message", messageRouter);
 app.use("/api/v1", checkoutRouter);
 app.use("/api/v1/auth", authRouter);
 
-dbConnection();
+// Start server only after database connection
+const startServer = async () => {
+  try {
+    const dbConnected = await dbConnection();
+    
+    if (dbConnected) {
+      app.listen(process.env.PORT, () => {
+        console.log(`Server is running on port ${process.env.PORT}`);
+      });
+    } else {
+      console.log("❌ Failed to connect to database. Server not started.");
+      process.exit(1);
+    }
+  } catch (error) {
+    console.error("❌ Error starting server:", error.message);
+    process.exit(1);
+  }
+};
+
+startServer();
 
 export default app;

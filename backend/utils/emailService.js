@@ -3,27 +3,47 @@ import nodemailer from 'nodemailer';
 
 dotenv.config();
 
-// Create transporter
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,
-  port: process.env.EMAIL_PORT,
-  secure: false, // true for 465, false for other ports
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS, // Use App Password for Gmail
-  },
-});
+// Check if email configuration is available
+const isEmailConfigured = process.env.EMAIL_HOST && process.env.EMAIL_USER && process.env.EMAIL_PASS;
 
-// Verify connection configuration
-transporter.verify((error, success) => {
-  if (error) {
-    console.log('Email configuration error:', error);
-  } else {
-    console.log('Email server is ready to take our messages');
-  }
-});
+let transporter = null;
+
+if (isEmailConfigured) {
+  // Create transporter
+  transporter = nodemailer.createTransport({
+    host: process.env.EMAIL_HOST || 'smtp.gmail.com',
+    port: process.env.EMAIL_PORT || 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS, // Use App Password for Gmail
+    },
+  });
+
+  // Verify connection configuration
+  transporter.verify((error, success) => {
+    if (error) {
+      console.log('Email configuration error:', error);
+    } else {
+      console.log('Email server is ready to take our messages');
+    }
+  });
+} else {
+  console.log('⚠️  Email configuration not found. Email functionality will be disabled.');
+  console.log('💡 To enable email, create a .env file with EMAIL_HOST, EMAIL_USER, and EMAIL_PASS');
+}
 
 export const sendContactEmail = async (contactData) => {
+  // Check if email is configured
+  if (!transporter) {
+    console.log('Email service not configured. Contact message logged to console:');
+    console.log('Name:', contactData.name);
+    console.log('Email:', contactData.email);
+    console.log('Phone:', contactData.phone);
+    console.log('Message:', contactData.message);
+    return { success: false, error: 'Email service not configured' };
+  }
+
   const { name, email, phone, message } = contactData;
   
   const mailOptions = {
